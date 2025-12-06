@@ -27,7 +27,6 @@ UENUM(BlueprintType)
 enum class EWeaponFireMode : uint8
 {
 	Single        UMETA(DisplayName = "Single"),
-	Burst		  UMETA(DisplayName = "Burst"),
 	Automatic     UMETA(DisplayName = "Automatic"),
 };
 
@@ -50,13 +49,34 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Weapon")
 	EWeaponFireMode FireMode;
 
+	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category="Weapon")
+	void Shoot();
+
+	UFUNCTION(BlueprintCallable, Category="Weapon")
+	void Reload();
+
+	UFUNCTION(BlueprintCallable)
+	int32 GetCurrentBulletsAmount();
+
 private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Weapon", meta=(AllowPrivateAccess="true"))
 	TObjectPtr<UStaticMeshComponent> WeaponMesh;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Weapon", meta=(AllowPrivateAccess="true"))
+	float Damage;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Weapon", meta=(AllowPrivateAccess="true"))
+	float CurrentBulletsAmount;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Weapon", meta=(AllowPrivateAccess="true"))
+	float MaxAmmoCapacity;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Weapon", meta=(AllowPrivateAccess="true"))
 	TObjectPtr<USphereComponent> InteractionCollision;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Weapon", meta=(AllowPrivateAccess="true"))
 	TObjectPtr<USceneComponent> LeftHandIK;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Weapon", meta=(AllowPrivateAccess="true"))
+	TObjectPtr<USceneComponent> ShootPoint;
 };

@@ -37,8 +37,6 @@ public:
 	float GetMaxHealth() const;
 
 protected:
-	virtual void BeginPlay() override;
-	
 	UPROPERTY(VisibleAnywhere, Category="Health")
 	TObjectPtr<UAbilitySystemComponent> AbilitySystemComponent;
 	
@@ -49,5 +47,5 @@ protected:
 
 	void OnNewMaxHealth(const FOnAttributeChangeData& Data) const;
 
-	void InitASCHealth();
+	void InitASCHealth(UAbilitySystemComponent* ASC);
 };
