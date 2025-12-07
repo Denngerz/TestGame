@@ -29,6 +29,9 @@ public:
 
 	UPROPERTY(BlueprintAssignable, Category = "Health")
 	FOnMaxHealthChanged OnMaxHealthChanged;
+
+	UFUNCTION(BlueprintCallable, Category = "Health")
+	void InitASCHealth(UAbilitySystemComponent* ASC);
 	
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Health")
 	float GetHealth() const;
@@ -37,8 +40,6 @@ public:
 	float GetMaxHealth() const;
 
 protected:
-	virtual void BeginPlay() override;
-	
 	UPROPERTY(VisibleAnywhere, Category="Health")
 	TObjectPtr<UAbilitySystemComponent> AbilitySystemComponent;
 	
@@ -48,6 +49,4 @@ protected:
 	void OnNewHealth(const FOnAttributeChangeData& Data) const;
 
 	void OnNewMaxHealth(const FOnAttributeChangeData& Data) const;
-
-	void InitASCHealth();
 };

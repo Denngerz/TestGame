@@ -21,12 +21,6 @@ float UHealthComponent::GetMaxHealth() const
 	return HealthSet ? HealthSet->GetMaxHealthPoints() : 0.f;
 }
 
-void UHealthComponent::BeginPlay()
-{
-	Super::BeginPlay();
-	InitASCHealth();
-}
-
 void UHealthComponent::OnNewHealth(const FOnAttributeChangeData& Data) const
 {
 	OnCurrentHealthChanged.Broadcast(Data.NewValue);
@@ -42,12 +36,9 @@ void UHealthComponent::OnNewMaxHealth(const FOnAttributeChangeData& Data) const
 	OnMaxHealthChanged.Broadcast(Data.NewValue);
 }
 
-void UHealthComponent::InitASCHealth()
+void UHealthComponent::InitASCHealth(UAbilitySystemComponent* ASC)
 {
-	if (IAbilitySystemInterface* ASCInterface = Cast<IAbilitySystemInterface>(GetOwner()))
-	{
-		AbilitySystemComponent = ASCInterface->GetAbilitySystemComponent();
-	}
+	AbilitySystemComponent = ASC;
 	
 	if (!ensureMsgf(AbilitySystemComponent, TEXT("HealthComponent [%s]: AbilitySystemComponent is null!"), *GetNameSafe(this)))
 	{
