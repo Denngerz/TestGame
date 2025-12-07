@@ -21,6 +21,7 @@ int32 UWeaponsHolder::TryAddWeapon(AWeaponBase* NewWeapon)
 		if (StoredWeapons[i].Weapon == nullptr)
 		{
 			StoredWeapons[i].Weapon = NewWeapon->GetClass();
+			StoredWeapons[i].IsEmpty = false;
 			StoredWeapons[i].CurrentAmmo = NewWeapon->GetCurrentBulletsAmount();
 			StoredWeapons[i].Index = i;
 			return i;
@@ -45,6 +46,7 @@ bool UWeaponsHolder::SetWeaponAtIndex(AWeaponBase* NewWeapon, int32 Index)
 	if (NewWeapon && StoredWeapons.IsValidIndex(Index))
 	{
 		StoredWeapons[Index].Weapon = NewWeapon->GetClass();
+		StoredWeapons[Index].IsEmpty = false;
 		StoredWeapons[Index].CurrentAmmo = NewWeapon->GetCurrentBulletsAmount();
 		return true;
 	}
@@ -56,7 +58,7 @@ bool UWeaponsHolder::EmptySlotsLeft()
 {
 	for (const FStorageWeapon& Slot : StoredWeapons)
 	{
-		if (Slot.Weapon == nullptr)
+		if (Slot.IsEmpty == true)
 		{
 			return true;
 		}
@@ -70,6 +72,7 @@ bool UWeaponsHolder::DropWeaponAtIndex(int32 Index)
 	if (StoredWeapons.IsValidIndex(Index))
 	{
 		StoredWeapons[Index].Weapon = nullptr;
+		StoredWeapons[Index].IsEmpty = true;
 		StoredWeapons[Index].CurrentAmmo = 0;
 		return true;
 	}

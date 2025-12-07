@@ -20,6 +20,9 @@ struct FStorageWeapon : public FTableRowBase
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	int32 Index;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool IsEmpty = true;
 };
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
