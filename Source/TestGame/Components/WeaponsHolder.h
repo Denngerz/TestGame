@@ -49,7 +49,7 @@ public:
 	bool DropWeaponAtIndex(int32 Index);
 
 private:
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Weapon", meta=(AllowPrivateAccess="true"))
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Weapon", meta=(AllowPrivateAccess="true"))
 	TArray<FStorageWeapon> StoredWeapons;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Weapon", meta=(AllowPrivateAccess="true"))
