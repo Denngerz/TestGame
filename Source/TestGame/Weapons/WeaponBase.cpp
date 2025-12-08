@@ -40,3 +40,16 @@ int32 AWeaponBase::GetCurrentBulletsAmount()
 {
 	return CurrentBulletsAmount;
 }
+
+void AWeaponBase::DecreaseBulletsAmmount()
+{
+	if (CurrentBulletsAmount > 0)
+	{
+		CurrentBulletsAmount--;
+	}
+}
+
+bool AWeaponBase::CanShoot()
+{
+	return CurrentBulletsAmount > 0;
+}

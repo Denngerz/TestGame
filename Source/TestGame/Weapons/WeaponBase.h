@@ -79,4 +79,10 @@ private:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Weapon", meta=(AllowPrivateAccess="true"))
 	TObjectPtr<USceneComponent> ShootPoint;
+
+	UFUNCTION(BlueprintCallable)
+	void DecreaseBulletsAmmount();
+
+	UFUNCTION(BlueprintCallable)
+	bool CanShoot();
 };
