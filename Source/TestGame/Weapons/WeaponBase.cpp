@@ -24,21 +24,14 @@ AWeaponBase::AWeaponBase()
 	FireMode   = EWeaponFireMode::Single;
 }
 
-void AWeaponBase::Interact_Implementation(AActor* Interactor)
-{
-	IInteractionInterface::Interact_Implementation(Interactor);
-
-	UE_LOG(LogTemp, Warning, TEXT("HealthComponent [%s]: AbilitySystemComponent is null!"), *GetNameSafe(this));
-}
-
-void AWeaponBase::Reload()
-{
-	CurrentBulletsAmount = MaxAmmoCapacity;
-}
-
 int32 AWeaponBase::GetCurrentBulletsAmount()
 {
 	return CurrentBulletsAmount;
+}
+
+void AWeaponBase::SetCurrentBulletsAmount(int32 NewAmount)
+{
+	CurrentBulletsAmount = FMath::Min(NewAmount, MaxAmmoCapacity);
 }
 
 void AWeaponBase::DecreaseBulletsAmmount()

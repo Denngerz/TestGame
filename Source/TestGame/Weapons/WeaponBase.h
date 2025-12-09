@@ -3,7 +3,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "TestGame/Interaction/InteractionInterface.h"
+#include "TestGame/Intefaces/InteractionInterface.h"
 #include "WeaponBase.generated.h"
 
 class USphereComponent;
@@ -38,8 +38,6 @@ class TESTGAME_API AWeaponBase : public AActor, public IInteractionInterface
 public:
 	AWeaponBase();
 
-	virtual void Interact_Implementation(AActor* Interactor) override;
-
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Weapon")
 	EWeaponType WeaponType;
 
@@ -52,11 +50,14 @@ public:
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category="Weapon")
 	void Shoot();
 
-	UFUNCTION(BlueprintCallable, Category="Weapon")
+	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category="Weapon")
 	void Reload();
 
 	UFUNCTION(BlueprintCallable)
 	int32 GetCurrentBulletsAmount();
+
+	UFUNCTION(BlueprintCallable)
+	void SetCurrentBulletsAmount(int32 NewAmount);
 
 private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Weapon", meta=(AllowPrivateAccess="true"))
@@ -66,10 +67,10 @@ private:
 	float Damage;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Weapon", meta=(AllowPrivateAccess="true"))
-	float CurrentBulletsAmount;
+	int32 CurrentBulletsAmount;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Weapon", meta=(AllowPrivateAccess="true"))
-	float MaxAmmoCapacity;
+	int32 MaxAmmoCapacity;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Weapon", meta=(AllowPrivateAccess="true"))
 	TObjectPtr<USphereComponent> InteractionCollision;
