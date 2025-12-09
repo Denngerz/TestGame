@@ -16,6 +16,6 @@ class TESTGAME_API IDamageableInterface
 	GENERATED_BODY()
 
 public:
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category="Interaction")
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category="Damagable")
 	void TakeDamage(float Damage, AActor* Caller);
 };
